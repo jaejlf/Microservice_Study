@@ -1,4 +1,4 @@
-package chat.demo.entity;
+package chat.demo.dto;
 
 
 import lombok.Getter;
@@ -8,12 +8,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class HelloMessage {
+public class MessageRequest {
 
     private String name;
+    private String content;
 
-    public HelloMessage(String name) {
+    public MessageRequest(String name, String content) {
         this.name = name;
+        this.content = content;
     }
 
 }
