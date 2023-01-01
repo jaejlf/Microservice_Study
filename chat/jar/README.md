@@ -36,7 +36,7 @@ Spring Boot + Web Socket + STOMP
 ### Response
 ```json
 {
-  "content": "Hello, {{name}}!"
+    "content": "Hello, {{name}}!"
 }
 ```
 '/app/hello'로 publish된 메시지는 위와 같은 형식으로 return 된다.
