@@ -39,7 +39,8 @@ Spring Boot + Web Socket + STOMP
 {
     "name": "이름",
     "content": "채팅 메시지",
-    "timestamp": "작성 시간" // format : YYYY.MM.dd HH:mm
+    "timestamp": "작성 시간"
 }
 ```
-'/app/hello'로 publish된 메시지는 위와 같은 형식으로 return 된다.
+- '/app/hello'로 publish된 메시지는 위와 같은 형식으로 return 된다.
+- 작성 시간 format : `YYYY.MM.dd HH:mm`
