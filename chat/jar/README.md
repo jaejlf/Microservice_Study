@@ -1,4 +1,4 @@
-# Demo 1
+# Demo 2
 Spring Boot + Web Socket + STOMP
 
 <br>
