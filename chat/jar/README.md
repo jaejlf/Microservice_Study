@@ -49,7 +49,7 @@ Spring Boot + Web Socket + STOMP + Kafka
 
 ## Kafka 테스트 API
 
-```json
+```sql
 POST '/send'
 
 {
