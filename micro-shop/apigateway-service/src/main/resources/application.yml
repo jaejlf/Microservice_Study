@@ -12,8 +12,14 @@ spring:
             baseMessage: Hello Spring Cloud Gateway Global Filter
             preLogger: true
             postLogger: true
+      routes:
+        - id: user-service
+          predicates:
+            - Path=/user-service/**
+          uri: lb://USER-SERVICE
 
-
+          filters:
+            - CustomFilter
 
 eureka:
   client:
