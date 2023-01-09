@@ -10,6 +10,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Slf4j
 @RequiredArgsConstructor
 @Service
@@ -29,6 +32,12 @@ public class ChatService {
         );
         messageRepository.save(message);
         simpMessagingTemplate.convertAndSend("/topic/" + roomId, MessageResponse.of(user, message));
+    }
+
+    public List<MessageResponse> getMessages(Long userId, Long roomId) {
+        DummyUserResponse user = dummyUserService.getUser(userId);
+        List<Message> messages = messageRepository.findAllByRoomId(roomId);
+        return messages.stream().map(x -> MessageResponse.of(user, x)).collect(Collectors.toList());
     }
 
 }

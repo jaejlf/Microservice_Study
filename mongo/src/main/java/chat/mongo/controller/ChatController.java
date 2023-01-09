@@ -1,6 +1,7 @@
 package chat.mongo.controller;
 
 import chat.mongo.dto.request.MessageRequest;
+import chat.mongo.dto.response.MessageResponse;
 import chat.mongo.service.ChatService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -8,10 +9,9 @@ import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -34,6 +34,13 @@ public class ChatController {
         log.info(request.getMessageType());
         log.info(request.getContent());
         chatService.sendMessage(userId, roomId, request);
+    }
+
+    @GetMapping("/list/{roomId}")
+    public List<MessageResponse> getMessages(@RequestHeader("userId") Long userId, @PathVariable Long roomId) {
+        log.info("userId = " + userId);
+        log.info("roomId = " + roomId);
+        return chatService.getMessages(userId, roomId);
     }
 
 }
