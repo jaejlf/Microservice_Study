@@ -1,6 +1,5 @@
 package chat.mongo.entity;
 
-import chat.mongo.enumerate.MessageType;
 import lombok.Getter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,15 +9,19 @@ import java.time.LocalDateTime;
 @Document(collection = "message")
 public class Message {
 
-    // private Long userId;
-
-    private String nickname; // 추후 회원 구현되면 -> userId에서 사용자 정보 가져오도록
-    private String profileImgUrl;
-    private MessageType messageType;
+    private Long userId;
+    private Long roomId;
+    private String messageType;
     private String content;
-    private LocalDateTime createdAt;
-    private Boolean hasAuth;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     // 스레드 - replies
+
+    public Message(Long userId, Long roomId, String messageType, String content) {
+        this.userId = userId;
+        this.roomId = roomId;
+        this.messageType = messageType;
+        this.content = content;
+    }
 
 }

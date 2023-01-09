@@ -1,32 +1,39 @@
 package chat.mongo.controller;
 
-import chat.mongo.dto.MessageRequest;
-import chat.mongo.dto.MessageResponse;
+import chat.mongo.dto.request.MessageRequest;
+import chat.mongo.service.ChatService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Controller;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 @Slf4j
+@RequiredArgsConstructor
 @Controller
 public class ChatController {
 
-    @MessageMapping("/hello")
-    @SendTo("/topic/greetings")
-    public MessageResponse greeting(MessageRequest msg) throws Exception {
-        Thread.sleep(100); // delay
+    private final ChatService chatService;
 
-        log.info("작성자 : " + msg.getName());
-        log.info("내용 : " + msg.getContent());
-        log.info("시간 : " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY.MM.dd HH:mm")));
+    @MessageMapping("/send/{roomId}")
+    public void sendMessage(@RequestHeader("userId") Long userId,
+                            @DestinationVariable Long roomId,
+                            @Payload MessageRequest request) {
+        chatService.sendMessage(userId, roomId, request);
+    }
 
-        return new MessageResponse(
-                msg.getName(),
-                msg.getContent(),
-                LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY.MM.dd HH:mm")));
+    @PostMapping("/send/{roomId}")
+    public void postMessage(@RequestHeader("userId") Long userId,
+                            @PathVariable Long roomId,
+                            @RequestBody MessageRequest request) {
+        log.info(request.getMessageType());
+        log.info(request.getContent());
+        chatService.sendMessage(userId, roomId, request);
     }
 
 }
