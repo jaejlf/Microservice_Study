@@ -15,12 +15,12 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
+    private String nickname;
+    private String profileImgUrl;
 
-    @Column(nullable = false, length = 50)
-    private String name;
-
-    public User(String name) {
-        this.name = name;
+    public User( String nickname, String profileImgUrl) {
+        this.nickname = nickname;
+        this.profileImgUrl = profileImgUrl;
     }
 
 }

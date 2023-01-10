@@ -1,8 +1,14 @@
 package msa.outuser;
 
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+import java.util.Optional;
+
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
@@ -10,15 +16,15 @@ public class UserController {
 
     private final UserRepository userRepository;
 
-    @PostMapping("/new/{name}")
-    public User createUser(@PathVariable String name) {
-        return userRepository.save(new User(name));
+    @PostMapping("/new")
+    public User createUser(@RequestBody Map<String, String> request) {
+        return userRepository.save(new User(request.get("nickname"), request.get("profileImgUrl")));
     }
 
     @GetMapping
     public User getUser(@RequestHeader("userId") Long userId) {
-        return userRepository.findById(userId)
-                .orElse(new User("유저 없음!"));
+        Optional<User> user = userRepository.findById(userId);
+        return user.get();
     }
 
 }
