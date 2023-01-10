@@ -1,6 +1,7 @@
 package chat.mongo.dto.response;
 
 import chat.mongo.entity.Message;
+import chat.mongo.enumerate.MessageType;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -14,7 +15,7 @@ public class MessageResponse {
     private Long userId;
     private String nickname;
     private String profileImgUrl;
-    private String messageType;
+    private MessageType messageType;
     private String content;
     private LocalDateTime createdAt;
     private Boolean hasAuthorized;

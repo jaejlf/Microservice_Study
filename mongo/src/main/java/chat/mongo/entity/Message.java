@@ -1,5 +1,6 @@
 package chat.mongo.entity;
 
+import chat.mongo.enumerate.MessageType;
 import lombok.Getter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -11,13 +12,13 @@ public class Message {
 
     private Long userId;
     private Long roomId;
-    private String messageType;
+    private MessageType messageType;
     private String content;
     private LocalDateTime createdAt = LocalDateTime.now();
 
     // 스레드 - replies
 
-    public Message(Long userId, Long roomId, String messageType, String content) {
+    public Message(Long userId, Long roomId, MessageType messageType, String content) {
         this.userId = userId;
         this.roomId = roomId;
         this.messageType = messageType;
