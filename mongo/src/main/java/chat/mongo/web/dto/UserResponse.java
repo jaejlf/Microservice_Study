@@ -1,11 +1,11 @@
-package chat.mongo.dto.request;
+package chat.mongo.web.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.io.Serializable;
+
 @Getter
-@AllArgsConstructor
-public class DummyUserRequest {
+public class UserResponse implements Serializable {
     private Long userId;
     private String nickname;
     private String profileImgUrl;

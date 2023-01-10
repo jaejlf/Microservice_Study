@@ -3,7 +3,6 @@ package chat.mongo.controller;
 import chat.mongo.dto.request.MessageRequest;
 import chat.mongo.dto.response.MessageResponse;
 import chat.mongo.dto.response.ResultResponse;
-import chat.mongo.entity.Message;
 import chat.mongo.service.ChatService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

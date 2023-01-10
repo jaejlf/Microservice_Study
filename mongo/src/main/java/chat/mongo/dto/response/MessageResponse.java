@@ -2,6 +2,7 @@ package chat.mongo.dto.response;
 
 import chat.mongo.entity.Message;
 import chat.mongo.enumerate.MessageType;
+import chat.mongo.web.dto.UserResponse;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -20,7 +21,7 @@ public class MessageResponse {
     private LocalDateTime createdAt;
     private Boolean hasAuthorized;
 
-    public static MessageResponse of(DummyUserResponse user, Message message) {
+    public static MessageResponse of(UserResponse user, Message message) {
         return MessageResponse.builder()
                 .userId(user.getUserId())
                 .nickname(user.getNickname())
