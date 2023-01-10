@@ -1,7 +1,6 @@
-package msa.outuser;
+package msa.outuser.user;
 
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,4 +1,4 @@
-package msa.outuser;
+package msa.outuser.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

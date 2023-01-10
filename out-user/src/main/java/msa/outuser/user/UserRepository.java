@@ -1,6 +1,5 @@
-package msa.outuser;
+package msa.outuser.user;
 
-import msa.outuser.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {
