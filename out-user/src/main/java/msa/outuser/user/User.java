@@ -14,11 +14,11 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long id;
     private String nickname;
     private String profileImgUrl;
 
-    public User( String nickname, String profileImgUrl) {
+    public User(String nickname, String profileImgUrl) {
         this.nickname = nickname;
         this.profileImgUrl = profileImgUrl;
     }

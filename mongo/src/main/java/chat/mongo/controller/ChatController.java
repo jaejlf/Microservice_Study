@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.web.bind.annotation.*;
@@ -18,13 +17,14 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
+@RequestMapping("/chat")
 public class ChatController {
 
     private final ChatService chatService;
 
     @MessageMapping("/send/{roomId}")
     public void sendMessaage(@RequestHeader("userId") Long userId,
-                             @DestinationVariable Long roomId,
+                             @PathVariable Long roomId,
                              @Payload MessageRequest request) {
         chatService.sendMessaage(userId, roomId, request);
     }
@@ -37,7 +37,8 @@ public class ChatController {
     }
 
     @GetMapping("/list/{roomId}")
-    public ResponseEntity<Object> getMessages(@RequestHeader("userId") Long userId, @PathVariable String roomId) {
+    public ResponseEntity<Object> getMessages(@RequestHeader("userId") Long userId,
+                                              @PathVariable String roomId) {
         List<MessageResponse> result = chatService.getMessages(userId, Long.parseLong(roomId));
         return ResponseEntity
                 .status(HttpStatus.OK)

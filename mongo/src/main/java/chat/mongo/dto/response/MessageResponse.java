@@ -7,29 +7,31 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
 @Builder
 public class MessageResponse {
 
-    private Long userId;
-    private String nickname;
-    private String profileImgUrl;
-    private MessageType messageType;
+    private String id;
+    private MessageType type;
     private String content;
     private LocalDateTime createdAt;
+    private UserResponse writer;
+    private List<Message> replies = new ArrayList<>();
     private Boolean hasAuthorized;
 
-    public static MessageResponse of(UserResponse user, Message message) {
+    public static MessageResponse of(Message message, UserResponse writer, Long userId) {
         return MessageResponse.builder()
-                .userId(user.getUserId())
-                .nickname(user.getNickname())
-                .profileImgUrl(user.getProfileImgUrl())
-                .messageType(message.getMessageType())
+                .id(message.getId())
+                .type(message.getType())
                 .content(message.getContent())
                 .createdAt(message.getCreatedAt())
-                .hasAuthorized(Objects.equals(user.getUserId(), message.getUserId()))
+                .writer(writer)
+                .replies(message.getReplies())
+                .hasAuthorized(Objects.equals(writer.getId(), userId))
                 .build();
     }
 

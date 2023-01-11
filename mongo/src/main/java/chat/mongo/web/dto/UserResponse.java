@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 @Getter
 public class UserResponse implements Serializable {
-    private Long userId;
+    private Long id;
     private String nickname;
     private String profileImgUrl;
 }

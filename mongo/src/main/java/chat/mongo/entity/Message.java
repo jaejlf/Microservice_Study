@@ -2,26 +2,30 @@ package chat.mongo.entity;
 
 import chat.mongo.enumerate.MessageType;
 import lombok.Getter;
+import nonapi.io.github.classgraph.json.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Document(collection = "message")
 public class Message {
 
-    private Long userId;
+    @Id
+    private String id;
     private Long roomId;
-    private MessageType messageType;
+    private Long userId;
+    private MessageType type;
     private String content;
     private LocalDateTime createdAt = LocalDateTime.now();
+    private List<Message> replies = new ArrayList<>();
 
-    // 스레드 - replies
-
-    public Message(Long userId, Long roomId, MessageType messageType, String content) {
-        this.userId = userId;
+    public Message(Long roomId, Long userId, MessageType type, String content) {
         this.roomId = roomId;
-        this.messageType = messageType;
+        this.userId = userId;
+        this.type = type;
         this.content = content;
     }
 
