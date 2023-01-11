@@ -26,14 +26,14 @@ public class ChatController {
     public void sendMessaage(@RequestHeader("userId") Long userId,
                              @PathVariable Long channelId,
                              @Payload MessageRequest request) {
-        chatService.sendMessaage(userId, channelId, request);
+        chatService.sendMessage(userId, channelId, request);
     }
 
     @PostMapping("/pub/{channelId}")
     public void postMessage(@RequestHeader("userId") Long userId,
                             @PathVariable Long channelId,
                             @RequestBody MessageRequest request) {
-        chatService.sendMessaage(userId, channelId, request);
+        chatService.sendMessage(userId, channelId, request);
     }
 
     @GetMapping("/list/{channelId}")

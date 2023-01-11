@@ -23,20 +23,27 @@ public class ChatService {
     private final MessageRepository messageRepository;
     private final UserClient userClient;
 
-    public void sendMessaage(Long userId, Long channelId, MessageRequest request) {
+    public void sendMessage(Long userId, Long channelId, MessageRequest request) {
         UserResponse writer = userClient.getUser(userId);
-        Message message = new Message(
-                writer.getId(),
-                channelId,
-                request.getType(),
-                request.getContent()
-        );
+
+        Message message;
+        if (request.getId() == null) {
+            message = new Message(
+                    writer.getId(),
+                    channelId,
+                    request.getType(),
+                    request.getContent()
+            );
+        } else {
+            message = messageRepository.findOneById(request.getId()).get(); // Optional 예외처리 전
+            message.updateMessage(request.getType(), request.getContent());
+        }
+
         messageRepository.save(message);
         simpMessagingTemplate.convertAndSend("/sub/" + channelId, message);
-    }
 
-    public void modifyMessage(Long userId, Long channelId, MessageRequest request) {
-        UserResponse writer = userClient.getUser(userId);
+        // IMAGE, FILE 타입 업로드 구현 전
+        // delete 스레드 있/없
     }
 
     public List<MessageResponse> getMessages(Long userId, Long channelId) {

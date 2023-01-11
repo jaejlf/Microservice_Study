@@ -29,4 +29,9 @@ public class Message {
         this.content = content;
     }
 
+    public void updateMessage(MessageType type, String content) {
+        this.type = type;
+        this.content = content;
+    }
+
 }
