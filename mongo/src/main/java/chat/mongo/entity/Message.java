@@ -15,15 +15,15 @@ public class Message {
 
     @Id
     private String id;
-    private Long roomId;
+    private Long channelId;
     private Long userId;
     private MessageType type;
     private String content;
     private LocalDateTime createdAt = LocalDateTime.now();
     private List<Message> replies = new ArrayList<>();
 
-    public Message(Long roomId, Long userId, MessageType type, String content) {
-        this.roomId = roomId;
+    public Message(Long channelId, Long userId, MessageType type, String content) {
+        this.channelId = channelId;
         this.userId = userId;
         this.type = type;
         this.content = content;

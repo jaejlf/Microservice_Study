@@ -1,6 +1,6 @@
 var stompClient = null;
-var subscribeUrl = "/topic/1"; // num -> roomId
-var publishUrl = "/send/1"; // num -> roomId
+var subscribeUrl = "/sub/1"; // num -> roomId
+var publishUrl = "/pub/1"; // num -> roomId
 
 function setConnected(connected) {
     $("#connect").prop("disabled", connected);

@@ -23,20 +23,24 @@ public class ChatService {
     private final MessageRepository messageRepository;
     private final UserClient userClient;
 
-    public void sendMessaage(Long userId, Long roomId, MessageRequest request) {
+    public void sendMessaage(Long userId, Long channelId, MessageRequest request) {
         UserResponse writer = userClient.getUser(userId);
         Message message = new Message(
                 writer.getId(),
-                roomId,
+                channelId,
                 request.getType(),
                 request.getContent()
         );
         messageRepository.save(message);
-        simpMessagingTemplate.convertAndSend("/topic/" + roomId, message);
+        simpMessagingTemplate.convertAndSend("/sub/" + channelId, message);
     }
 
-    public List<MessageResponse> getMessages(Long userId, Long roomId) {
-        List<Message> messages = messageRepository.findAllByRoomId(roomId);
+    public void modifyMessage(Long userId, Long channelId, MessageRequest request) {
+        UserResponse writer = userClient.getUser(userId);
+    }
+
+    public List<MessageResponse> getMessages(Long userId, Long channelId) {
+        List<Message> messages = messageRepository.findAllByChannelId(channelId);
         return messages
                 .stream()
                 .map(x -> MessageResponse.of(x, userClient.getUser(x.getUserId()), userId))

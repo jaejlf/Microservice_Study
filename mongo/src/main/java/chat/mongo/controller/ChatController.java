@@ -22,24 +22,24 @@ public class ChatController {
 
     private final ChatService chatService;
 
-    @MessageMapping("/send/{roomId}")
+    @MessageMapping("/pub/{channelId}")
     public void sendMessaage(@RequestHeader("userId") Long userId,
-                             @PathVariable Long roomId,
+                             @PathVariable Long channelId,
                              @Payload MessageRequest request) {
-        chatService.sendMessaage(userId, roomId, request);
+        chatService.sendMessaage(userId, channelId, request);
     }
 
-    @PostMapping("/send/{roomId}")
+    @PostMapping("/pub/{channelId}")
     public void postMessage(@RequestHeader("userId") Long userId,
-                            @PathVariable Long roomId,
+                            @PathVariable Long channelId,
                             @RequestBody MessageRequest request) {
-        chatService.sendMessaage(userId, roomId, request);
+        chatService.sendMessaage(userId, channelId, request);
     }
 
-    @GetMapping("/list/{roomId}")
+    @GetMapping("/list/{channelId}")
     public ResponseEntity<Object> getMessages(@RequestHeader("userId") Long userId,
-                                              @PathVariable String roomId) {
-        List<MessageResponse> result = chatService.getMessages(userId, Long.parseLong(roomId));
+                                              @PathVariable String channelId) {
+        List<MessageResponse> result = chatService.getMessages(userId, Long.parseLong(channelId));
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(ResultResponse.ok("메시지 리스트 조회", result));

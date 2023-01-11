@@ -9,11 +9,11 @@ import java.util.List;
 @Document(collection = "connection")
 public class Connection {
 
-    private Long roomId;
+    private Long channelId;
     private List<ConnectedUser> connectedUsers;
 
-    public Connection(Long roomId, List<ConnectedUser> connectedUsers) {
-        this.roomId = roomId;
+    public Connection(Long channelId, List<ConnectedUser> connectedUsers) {
+        this.channelId = channelId;
         this.connectedUsers = connectedUsers;
     }
 

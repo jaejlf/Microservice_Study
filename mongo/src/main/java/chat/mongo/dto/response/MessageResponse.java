@@ -7,7 +7,6 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,7 +19,7 @@ public class MessageResponse {
     private String content;
     private LocalDateTime createdAt;
     private UserResponse writer;
-    private List<Message> replies = new ArrayList<>();
+    private List<Message> replies;
     private Boolean hasAuthorized;
 
     public static MessageResponse of(Message message, UserResponse writer, Long userId) {
