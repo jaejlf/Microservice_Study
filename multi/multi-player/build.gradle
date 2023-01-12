@@ -11,10 +11,12 @@ sourceCompatibility = '11'
 repositories {
     mavenCentral()
 }
-
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // module
+    implementation files('common/multi-common.jar')
 }
 
 tasks.named('test') {
