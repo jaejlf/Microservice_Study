@@ -1,4 +1,4 @@
-package chat.mongo.web.dto;
+package chat.mongo.web;
 
 import lombok.Getter;
 

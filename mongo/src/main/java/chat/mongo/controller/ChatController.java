@@ -13,6 +13,7 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -25,14 +26,14 @@ public class ChatController {
     @MessageMapping("/pub/{channelId}")
     public void sendMessaage(@RequestHeader("userId") Long userId,
                              @PathVariable Long channelId,
-                             @Payload MessageRequest request) {
+                             @Payload MessageRequest request) throws ExecutionException, InterruptedException {
         chatService.sendMessage(userId, channelId, request);
     }
 
     @PostMapping("/pub/{channelId}")
     public void postMessage(@RequestHeader("userId") Long userId,
                             @PathVariable Long channelId,
-                            @RequestBody MessageRequest request) {
+                            @RequestBody MessageRequest request) throws ExecutionException, InterruptedException {
         chatService.sendMessage(userId, channelId, request);
     }
 

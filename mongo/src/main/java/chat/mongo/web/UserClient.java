@@ -1,6 +1,5 @@
-package chat.mongo.web.client;
+package chat.mongo.web;
 
-import chat.mongo.web.dto.UserResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;

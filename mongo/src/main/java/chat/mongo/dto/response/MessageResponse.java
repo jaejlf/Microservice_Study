@@ -2,7 +2,7 @@ package chat.mongo.dto.response;
 
 import chat.mongo.entity.Message;
 import chat.mongo.enumerate.MessageType;
-import chat.mongo.web.dto.UserResponse;
+import chat.mongo.web.UserResponse;
 import lombok.Builder;
 import lombok.Getter;
 
