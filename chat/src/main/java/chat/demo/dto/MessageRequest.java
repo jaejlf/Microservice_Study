@@ -6,16 +6,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
-@Setter
-@NoArgsConstructor
 public class MessageRequest {
 
+    private Long channelId;
     private String name;
     private String content;
-
-    public MessageRequest(String name, String content) {
-        this.name = name;
-        this.content = content;
-    }
 
 }

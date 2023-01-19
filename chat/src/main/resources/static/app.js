@@ -1,4 +1,7 @@
 var stompClient = null;
+var wsLink = "/chat/ws";
+var subLink = "/sub/1";
+var pubLink = "/pub/hello";
 
 function setConnected(connected) {
     $("#connect").prop("disabled", connected);
@@ -13,12 +16,12 @@ function setConnected(connected) {
 }
 
 function connect() {
-    var socket = new SockJS('/ws');
+    var socket = new SockJS(wsLink);
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/greetings', function (greeting) {
+        stompClient.subscribe(subLink, function (greeting) {
             showGreeting(JSON.parse(greeting.body).content);
         });
     });
@@ -33,7 +36,7 @@ function disconnect() {
 }
 
 function sendName() {
-    stompClient.send("/app/hello", {}, JSON.stringify({'name': $("#name").val()}));
+    stompClient.send(pubLink, {}, JSON.stringify({'name': $("#name").val()}));
 }
 
 function showGreeting(message) {

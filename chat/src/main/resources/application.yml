@@ -6,6 +6,6 @@ spring:
       authentication-database: admin
       database: chat
 
-#server:
-#  servlet:
-#    context-path: /chat
+server:
+  servlet:
+    context-path: /chat
